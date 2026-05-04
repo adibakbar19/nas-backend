@@ -54,6 +54,11 @@ def _standardize_common_columns(df: DataFrame, config: dict) -> DataFrame:
     for code_col in ("state_code", "district_code", "mukim_code"):
         if code_col in out.columns:
             out[code_col] = out[code_col].astype("string").where(out[code_col].notna(), pd.NA)
+            # Zero-pad single-digit numeric codes to match the 2-digit canonical format
+            # used in lookup tables (e.g. integer 1 → "01", already-padded "01" unchanged)
+            out[code_col] = out[code_col].map(
+                lambda v: v.zfill(2) if pd.notna(v) and v.isdigit() and len(v) == 1 else v
+            )
     return out
 
 
