@@ -373,3 +373,6 @@ This ERD was derived from:
   - `backend/app/repositories/address_read_repository.py`
   - `backend/app/repositories/address_match_review_repository.py`
   - `backend/app/repositories/lookup_admin_repository.py`
+
+docker exec nas-worker find /app/logs/jobs -name "*.log" | head -5
+docker exec nas-worker cat /app/logs/jobs/<new-job-id>.log | tail -20
