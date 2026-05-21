@@ -2,7 +2,7 @@ import logging
 from typing import Protocol
 
 from backend.app.monitoring import record_queue_publish
-from backend.app.schemas.ingest import BulkIngestEvent, SearchSyncEvent
+from backend.app.schemas.ingest.ingest import BulkIngestEvent, SearchSyncEvent
 
 
 logger = logging.getLogger(__name__)

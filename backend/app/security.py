@@ -15,7 +15,7 @@ from fastapi.security import APIKeyHeader, HTTPAuthorizationCredentials, HTTPBea
 from pydantic import BaseModel, Field
 
 from backend.app.db.migration_settings import get_runtime_db_dsn, get_runtime_db_schema
-from backend.app.repositories.agency_api_key_repository import AgencyApiKeyRepository
+from backend.app.repositories.admin.agency_api_key_repository import AgencyApiKeyRepository
 
 
 logger = logging.getLogger(__name__)

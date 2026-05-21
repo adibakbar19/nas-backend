@@ -63,7 +63,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--failed-out", required=True, help="Retried failed output parquet path")
     parser.add_argument("--require-mukim", action="store_true", help="Fail rows missing mukim")
     parser.add_argument("--config", default=None, help="Optional pipeline config path")
-    parser.add_argument("--audit-log", default=os.getenv("NAS_AUDIT_LOG", "logs/nas_audit.log"))
+    parser.add_argument("--audit-log", default=os.getenv("NAS_AUDIT_LOG", "logs/audit.jsonl"))
     return parser.parse_args()
 
 

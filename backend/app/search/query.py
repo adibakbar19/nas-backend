@@ -17,30 +17,17 @@ SEARCH_SOURCE_FIELDS = [
     "confidence_score",
 ]
 
+FUZZY_SEARCH_FIELDS = [
+    "address_clean",
+    "postcode_name",
+    "locality_name",
+    "district_name",
+    "mukim_name",
+    "state_name",
+]
 
-def autocomplete(
-    *,
-    es_url: str,
-    index: str,
-    query: str,
-    size: int,
-    timeout_seconds: int = 20,
-) -> list[dict[str, Any]]:
-    payload = {
-        "size": size,
-        "_source": SEARCH_SOURCE_FIELDS,
-        "query": {
-            "multi_match": {
-                "query": query,
-                "type": "bool_prefix",
-                "fields": ["autocomplete", "autocomplete._2gram", "autocomplete._3gram"],
-            }
-        },
-        "sort": [
-            {"_score": {"order": "desc"}},
-            {"confidence_score": {"order": "desc", "missing": "_last"}},
-        ],
-    }
+
+def _execute_search(es_url: str, index: str, payload: dict, timeout_seconds: int) -> list[dict[str, Any]]:
     response = requests.post(
         f"{es_url.rstrip('/')}/{index}/_search",
         json=payload,
@@ -55,3 +42,47 @@ def autocomplete(
         source["_score"] = item.get("_score")
         hits.append(source)
     return hits
+
+
+def search_address(
+    *,
+    es_url: str,
+    index: str,
+    query: str,
+    size: int,
+    timeout_seconds: int = 20,
+) -> list[dict[str, Any]]:
+    payload = {
+        "size": size,
+        "_source": SEARCH_SOURCE_FIELDS,
+        "query": {
+            "bool": {
+                "should": [
+                    {
+                        # Prefix/incremental match — rewards exact prefix typing, scored higher
+                        "multi_match": {
+                            "query": query,
+                            "type": "bool_prefix",
+                            "fields": ["autocomplete", "autocomplete._2gram", "autocomplete._3gram"],
+                            "boost": 2.0,
+                        }
+                    },
+                    {
+                        # Fuzzy match — tolerates typos and misspellings across key address fields
+                        "multi_match": {
+                            "query": query,
+                            "fields": FUZZY_SEARCH_FIELDS,
+                            "fuzziness": "AUTO",
+                            "prefix_length": 1,
+                        }
+                    },
+                ],
+                "minimum_should_match": 1,
+            }
+        },
+        "sort": [
+            {"_score": {"order": "desc"}},
+            {"confidence_score": {"order": "desc", "missing": "_last"}},
+        ],
+    }
+    return _execute_search(es_url, index, payload, timeout_seconds)

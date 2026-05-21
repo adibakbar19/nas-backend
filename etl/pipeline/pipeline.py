@@ -214,7 +214,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--status-path", default=None, help="Parquet path for per-record status")
     parser.add_argument("--resume", action="store_true", help="Reuse existing stage parquet outputs when present")
     parser.add_argument("--resume-failed-only", action="store_true", help="Accepted for CLI compatibility; reruns the Pandas pipeline")
-    parser.add_argument("--audit-log", default="output/audit_log.jsonl")
+    parser.add_argument("--audit-log", default=os.getenv("NAS_AUDIT_LOG", "logs/audit.jsonl"))
     return parser.parse_args()
 
 

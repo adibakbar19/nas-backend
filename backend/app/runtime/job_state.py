@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from backend.app.monitoring import record_job_transition
-from backend.app.repositories.ingest_job_state_repository import IngestJobStateRepository
+from backend.app.repositories.ingest.ingest_job_state_repository import IngestJobStateRepository
 
 
 _jobs: dict[str, dict[str, Any]] = {}

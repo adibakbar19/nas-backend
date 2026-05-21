@@ -6,8 +6,8 @@ from typing import Any
 from backend.app.core.settings import get_settings
 from backend.app.runtime import job_state
 from backend.app.runtime import settings
-from backend.app.schemas.ingest import BulkIngestEvent, SearchSyncEvent
-from backend.app.services.search_sync_service import SearchSyncService
+from backend.app.schemas.ingest.ingest import BulkIngestEvent, SearchSyncEvent
+from backend.app.services.search.search_sync_service import SearchSyncService
 
 
 job_state.configure(

@@ -35,7 +35,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source-col", default=None, help="Source address column in failed data")
     parser.add_argument("--correction-col", default=None, help="Corrected address column in corrections CSV")
     parser.add_argument("--config", default=None, help="Optional pipeline config path")
-    parser.add_argument("--audit-log", default=os.getenv("NAS_AUDIT_LOG", "logs/nas_audit.log"))
+    parser.add_argument("--audit-log", default=os.getenv("NAS_AUDIT_LOG", "logs/audit.jsonl"))
     return parser.parse_args()
 
 

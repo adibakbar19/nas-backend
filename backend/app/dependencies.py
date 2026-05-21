@@ -2,21 +2,21 @@ from functools import lru_cache
 
 from backend.app.core.settings import AppSettings, get_settings
 from backend.app.queue.producer import QueueProducer, ValkeyStreamQueueProducer
-from backend.app.repositories.address_read_repository import AddressReadRepository
-from backend.app.repositories.address_match_review_repository import AddressMatchReviewRepository
-from backend.app.repositories.boundary_admin_repository import BoundaryAdminRepository
-from backend.app.repositories.lookup_admin_repository import LookupAdminRepository
-from backend.app.services.agency_api_key_service import AgencyApiKeyService
-from backend.app.services.address_match_review_service import AddressMatchReviewService
-from backend.app.services.address_parse_service import AddressParseService
-from backend.app.services.address_read_service import AddressReadService
-from backend.app.services.auth_service import AuthService
-from backend.app.services.agency_user_service import AgencyUserService
-from backend.app.services.boundary_admin_service import BoundaryAdminService
-from backend.app.services.ingest_service import IngestService
-from backend.app.services.lookup_admin_service import LookupAdminService
-from backend.app.services.ops_service import OpsService
-from backend.app.services.search_api_service import SearchApiService
+from backend.app.repositories.address.address_read_repository import AddressReadRepository
+from backend.app.repositories.address.address_match_review_repository import AddressMatchReviewRepository
+from backend.app.repositories.admin.boundary_admin_repository import BoundaryAdminRepository
+from backend.app.repositories.admin.lookup_admin_repository import LookupAdminRepository
+from backend.app.services.admin.agency_api_key_service import AgencyApiKeyService
+from backend.app.services.address.address_match_review_service import AddressMatchReviewService
+from backend.app.services.address.address_parse_service import AddressParseService
+from backend.app.services.address.address_read_service import AddressReadService
+from backend.app.services.auth.auth_service import AuthService
+from backend.app.services.admin.agency_user_service import AgencyUserService
+from backend.app.services.admin.boundary_admin_service import BoundaryAdminService
+from backend.app.services.ingest.ingest_service import IngestService
+from backend.app.services.admin.lookup_admin_service import LookupAdminService
+from backend.app.services.ops.ops_service import OpsService
+from backend.app.services.search.search_api_service import SearchApiService
 
 
 @lru_cache(maxsize=1)

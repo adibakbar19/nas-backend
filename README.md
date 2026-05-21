@@ -490,7 +490,7 @@ Set `VITE_API_BASE_URL` in `frontend-vue/.env` to point at the API server.
 
 ## Audit Log
 
-All pipeline scripts write JSONL audit entries to `logs/nas_audit.log` (override with `NAS_AUDIT_LOG`):
+All pipeline scripts write JSONL audit entries to `logs/audit.jsonl` (override with `NAS_AUDIT_LOG`):
 
 ```bash
 python -m etl.pipeline ... --audit-log logs/audit_2026-04.log

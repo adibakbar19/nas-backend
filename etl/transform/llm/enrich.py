@@ -42,7 +42,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source-col", default=None, help="Override source address column")
     parser.add_argument(
         "--audit-log",
-        default=os.getenv("NAS_AUDIT_LOG", "logs/nas_audit.log"),
+        default=os.getenv("NAS_AUDIT_LOG", "logs/audit.jsonl"),
         help="JSONL audit logfile path",
     )
     return parser.parse_args()

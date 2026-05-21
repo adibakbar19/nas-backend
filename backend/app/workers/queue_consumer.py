@@ -16,7 +16,7 @@ from backend.app.monitoring import (
     record_worker_started,
 )
 from backend.app.runtime import jobs as ingest_jobs
-from backend.app.services.ingest_service import IngestService
+from backend.app.services.ingest.ingest_service import IngestService
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")

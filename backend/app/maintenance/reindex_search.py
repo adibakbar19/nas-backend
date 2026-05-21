@@ -2,7 +2,7 @@ import argparse
 import os
 
 from backend.app.core.settings import get_settings
-from backend.app.services.search_sync_service import SearchSyncService
+from backend.app.services.search.search_sync_service import SearchSyncService
 
 
 def parse_args() -> argparse.Namespace:
